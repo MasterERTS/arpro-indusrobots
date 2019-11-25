@@ -1,0 +1,47 @@
+zero
+y
+sp 30
+
+edit ex2
+tool pen
+pen.empty = 1009
+signal(5)
+move wait.loc
+reacti pen.empty, refill
+appro board:a, 100
+moves board:a
+closei
+moves board:b
+break
+moves board:c
+break
+moves board:d
+break
+moves board:a
+openi
+departs 100
+move wait.loc
+set board = shift(board by 10, 10, 0)
+e
+
+edit refill
+pen.refilled = 1010
+set interrupt.loc = here
+set dest.loc = dest
+openi
+departs 100
+appro recharge, 100
+moves recharge
+wait sig(pen.refilled)
+departs 100
+appro interrupt.loc, 100
+moves interrupt.loc
+closei
+moves dest.loc
+break
+return
+e
+
+load glue.lc
+load alltools.v2
+

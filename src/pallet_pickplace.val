@@ -1,0 +1,30 @@
+zero
+y
+sp 30
+
+edit ex3
+tool gripper
+signal(5)
+openi
+set palletframe = frame(pallet.origin, pallet.x, pallet.y, pallet.origin)
+move default
+for i = 0 to 1
+for j = 0 to 2
+set pick.loc = palletframe:shift(null by j*82, i*59, 0)
+appro pick.loc, 50
+moves pick.loc
+closei
+departs 50
+set place.loc = shift(target by 0, 0, i*45+(j+1)*15)
+appro place.loc, 50
+moves place.loc
+openi
+departs 50
+move default
+end
+end
+e
+
+load alltools.v2
+load guillej.lc
+

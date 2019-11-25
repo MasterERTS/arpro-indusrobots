@@ -1,0 +1,56 @@
+zero
+y
+sp 30
+
+edit ex1
+tool succion.pad
+part.in.p1 = 1004
+part.in.p2 = 1005
+detector1 = 1007
+detector2 = 1008
+conveyor.stop = -1
+conveyor.start = 1
+conveyor.dir1 = 2
+conveyor.dir2 = -2
+signal(5)
+signal(conveyor.stop)
+move wait.loc
+wait sig(part.in.p1) or sig(part.in.p2)
+if (sig(part.in.p1)) then
+appro p1, 100
+moves p1
+end
+if (sig(part.in.p2)) then
+appro p2, 100
+moves p2
+end
+closei
+departs 100
+appro place, 100
+moves place
+openi
+departs 100
+signal(conveyor.dir1)
+signal(conveyor.start)
+wait sig(detector2)
+signal(conveyor.stop)
+timer 1 = 0
+wait timer(1) > 2
+signal(conveyor.dir2)
+signal(conveyor.start)
+wait sig(detector1)
+signal(conveyor.stop)
+appro grasp.loc.stopped, 100
+moves grasp.loc.stopped
+closei
+departs 100
+appro p3, 100
+moves p3
+openi
+departs 100
+move wait.loc
+e
+
+load pickconv.lc
+load alltools.v2
+
